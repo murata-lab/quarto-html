@@ -8,13 +8,13 @@
 <script src="site.js" defer></script>
 </head>
 <body>
-<header><a class="brand" href="./">Quarto HTML slides<span>MURATA LAB</span></a><nav aria-label="メイン"><a href="#example">制作例</a><a href="#how">つくり方</a><a href="https://github.com/murata-lab/quarto-html">GitHub ↗</a></nav></header>
+<header><a class="brand" href="./">Quarto HTML slides<span>MURATA LAB</span></a><nav aria-label="メイン"><a href="#example">制作例</a><a href="getting-started.html">始め方</a><a href="https://github.com/murata-lab/quarto-html">GitHub ↗</a></nav></header>
 <main>
 <section class="hero">
 <div class="eyebrow">QUARTO × HTML ANIMATION</div>
 <h1>動く図で、<br>研究を伝える。</h1>
 <p class="lead">経路が伸びる。作業が並ぶ。モデルが学ぶ。<br>伝えたい変化を、ひとつずつ見せるスライド。</p>
-<div class="links"><a class="primary" href="nco-intro.html">サンプルスライドを開く <span>↗</span></a><a class="secondary" href="nco-intro.pdf">PDFを見る ↗</a></div>
+<div class="links"><a class="primary" href="getting-started.html">インストール・始め方 <span>→</span></a><a class="secondary" href="nco-intro.html">サンプルスライドを開く ↗</a><a class="secondary" href="nco-intro.pdf">PDFを見る ↗</a></div>
 <p class="caption">HTMLは矢印キー・タップで操作できます。ダウンロードすればオフラインでも閲覧できます。</p>
 </section>
 <section id="example" class="example section">
@@ -45,7 +45,7 @@ JSPかFSSPみたいな問題を例示。
 cd quarto-html
 uv sync
 uv run playwright install chromium
-uv run scripts/slides.py build nco-intro</code></pre><div><h3>手元で試す</h3><p>Quarto CLIとuvを用意して実行します。出力はアニメーションを内包した単一HTMLと、各ページの最終状態を収めたPDFです。</p><a href="https://github.com/murata-lab/quarto-html#準備">セットアップと制作ルール ↗</a></div></div></section>
+uv run scripts/slides.py build nco-intro</code></pre><div><h3>手元で試す</h3><p>Quarto CLIとuvを用意して実行します。出力はアニメーションを内包した単一HTMLと、各ページの最終状態を収めたPDFです。</p><a href="getting-started.html">VS Code・AI拡張の導入から、詳しい手順を見る →</a></div></div></section>
 <section class="section hosting"><div class="eyebrow">03 / GITHUB PAGES</div><h2>リンクひとつで、見せられる。</h2><div class="hosting-grid"><article><h3>動くデモを公開</h3><p>HTML・CSS・JavaScriptを配信できるので、スライド、ループするアニメーション、操作できる図をそのまま公開できます。</p></article><article><h3>プロンプトと並べる</h3><p>完成した図の隣に制作指示を置けば、見た人が自分の発表に応用できます。HTMLやPDFへのリンクも置けます。</p></article><article><h3>制作環境と分ける</h3><p>このサイトは専用の <code>gh-pages</code> ブランチに置いています。通常のcloneで開く <code>main</code> には、サイトのファイルが混ざりません。</p></article></div><p class="note">GitHub Pagesは静的サイトのホスティングです。Pythonの実行やデータベースへの保存など、サーバー側の処理には別のサービスが必要です。<a href="https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages">GitHub Pagesについて ↗</a></p></section>
 </main>
 <footer><span>Quarto HTML slides / Murata Lab</span><a href="https://github.com/murata-lab/quarto-html">ソースと使い方 ↗</a></footer>

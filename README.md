@@ -4,6 +4,7 @@
 
 - `index.html`: 紹介ページとプロンプト例
 - `site.css`, `site.js`: サイトの表示と操作
+- `getting-started.html`, `guide.css`, `guide.js`: 導入ガイドとトグル操作
 - `demo.js`: 抽出した1枚のループ再生（元のスライドには影響しない）
 - `build.py`: mainのHTMLから背景ページを抽出し、HTML/PDFをコピー
 - `background.html`, `nco-intro.html`, `nco-intro.pdf`, `source-revision.txt`: 生成物

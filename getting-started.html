@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="VS Code、Git、Quarto、CodexまたはClaude Codeの導入から、テンプレートのclone、最初のスライド作成まで。Windows・macOS向けの手順を項目ごとに開いて確認できます。">
+<title>始め方・インストール手順 | Quarto HTML slides</title>
+<link rel="stylesheet" href="site.css"><link rel="stylesheet" href="guide.css"><script src="guide.js" defer></script>
+</head>
+<body>
+<header><a class="brand" href="./">Quarto HTML slides<span>MURATA LAB</span></a><nav aria-label="メイン"><a href="./#example">制作例</a><a href="getting-started.html" aria-current="page">始め方</a><a href="https://github.com/murata-lab/quarto-html">GitHub ↗</a></nav></header>
+<main>
+<section class="guide-hero"><a class="back-link" href="./">← 紹介ページに戻る</a><div class="eyebrow">GET STARTED / WINDOWS &amp; macOS</div><h1>最初の1枚を、<br>つくるまで。</h1><p class="lead">エディタとAIを用意して、テンプレートを手元へ。<br>順番に進めれば、スライドを作り始められます。</p><p class="guide-intro">各項目をクリックすると詳しい手順が開きます。導入済みのものは確認だけして、次へ進んでください。</p><div class="guide-flow" aria-label="セットアップの流れ"><span>VS Code</span><b aria-hidden="true">→</b><span>Git・Quarto</span><b aria-hidden="true">→</b><span>AI拡張</span><b aria-hidden="true">→</b><span>clone</span><b aria-hidden="true">→</b><span>ビルド</span></div></section>
+<div class="guide-layout">
+<aside class="guide-toc" aria-label="ページ内目次"><span class="eyebrow">CONTENTS</span><a href="#vscode">01　VS Code</a><a href="#git">02　Git</a><a href="#quarto">03　Quarto</a><a href="#ai">04　AI拡張</a><a href="#clone">05　テンプレートをclone</a><a href="#uv">06　uv</a><a href="#build">07　サンプルをビルド</a><a href="#first-slide">08　自分のスライド</a><a href="#trouble">困ったとき</a><div class="toc-bottom">Windows：PowerShell<br>macOS：ターミナル<br><span>公式手順の確認：2026-10-22</span></div></aside>
+<div class="guide-content">
+<div class="before-start"><h2>このページで用意するもの</h2><p><strong>共通：</strong>VS Code、Git、Quarto CLI、uv。<strong>AI：</strong>CodexまたはClaude CodeのVS Code拡張を、どちらか1つ。</p><p>AI拡張は、利用できるアカウントでサインインします。公開リポジトリのcloneは、GitHubアカウントなしでも行えます。自分のリポジトリに保存・公開するときにGitHubへのサインインが必要です。</p><p class="small-note">このガイドはWindowsとmacOS向けです。サンプルのビルド検証環境はmacOSです。</p></div>
+<div class="expand-tools"><span>番号順に開いて進めてください</span><div><button type="button" id="expand-all">すべて開く</button><button type="button" id="collapse-all">すべて閉じる</button></div></div>
+
+<details class="guide-step" id="vscode"><summary><span class="step-no">01</span><span class="step-title">VS Codeをインストールする<small>スライドの文章と図を編集する場所を用意します。</small></span><span class="step-tag">共通</span></summary><div class="step-body">
+<p>VS Code（Visual Studio Code）は、ファイル編集とAIへの依頼、コマンドの実行を1つの画面で行うアプリです。</p>
+<a class="download-link" href="https://code.visualstudio.com/download">VS Codeのダウンロードページ ↗</a>
+<div class="os-grid"><section><h3>Windows</h3><ol><li>ダウンロードページでWindows用のインストーラーを選びます。</li><li>ダウンロードしたファイルを実行し、案内に沿ってインストールします。</li><li>インストール後、スタートメニューから「Visual Studio Code」を開きます。</li></ol><p class="source-link"><a href="https://code.visualstudio.com/docs/setup/windows">Windowsの公式手順 ↗</a></p></section><section><h3>macOS</h3><ol><li>Mac用のファイルをダウンロードします。Apple Silicon／Intelは使用するMacに合わせて選びます。</li><li>ダウンロードしたDMGを開き、「Visual Studio Code.app」を「アプリケーション」へ移動します。ZIPの場合は展開してから移動します。</li><li>アプリケーションからVS Codeを開きます。</li></ol><p class="source-link"><a href="https://code.visualstudio.com/docs/setup/mac">macOSの公式手順 ↗</a></p></section></div>
+<h3>最初に覚える3つの場所</h3><dl class="term-list"><div><dt>エクスプローラー</dt><dd>左側のファイル一覧です。ここからメモやスライドを開きます。</dd></div><div><dt>拡張機能</dt><dd>左側の四角が並んだアイコンです。QuartoやAIの機能を追加します。</dd></div><div><dt>ターミナル</dt><dd>上部メニューの「ターミナル → 新しいターミナル」で開きます。下部に現れる入力欄へコマンドを貼り付けてEnterで実行します。</dd></div></dl>
+<details class="sub-detail"><summary>日本語表示にしたいとき</summary><div><p>拡張機能で「Japanese Language Pack」を検索し、発行元がMicrosoftのものをインストールします。案内が表示されたらVS Codeを再起動してください。英語表示のままでも作業できます。</p></div></details>
+<p class="checkpoint"><strong>ここまでの確認：</strong>VS Codeが開き、「ターミナル → 新しいターミナル」を選べればOKです。</p>
+</div></details>
+
+<details class="guide-step" id="git"><summary><span class="step-no">02</span><span class="step-title">Gitをインストールする<small>テンプレートをダウンロードし、変更を記録する道具です。</small></span><span class="step-tag">共通</span></summary><div class="step-body">
+<p>VS CodeにGitの操作画面は含まれますが、Git本体も必要です。まずVS Codeのターミナルで確認します。</p><pre><code>git --version</code></pre><p>バージョン番号が出れば、インストール済みです。下の導入手順を飛ばして次へ進みます。</p>
+<div class="os-grid"><section><h3>Windows</h3><ol><li><a href="https://git-scm.com/install/windows">Git公式のWindows用ページ</a>から、PCに合うGit for Windowsをダウンロードします。</li><li>インストーラーを起動します。通常は標準設定で進められます。既定のエディタを選ぶ画面では、VS Codeを選ぶと後で扱いやすくなります。</li><li>完了したら、VS Codeをすべて閉じて開き直します。</li></ol><p>このガイドのコマンドはPowerShellで実行できます。Git for Windowsに付属するGit Bashは、Claude CodeのWindows環境でも利用されます。</p></section><section><h3>macOS</h3><p>Gitがなければ、ターミナルで次を実行し、表示された画面でCommand Line Toolsをインストールします。</p><pre><code>xcode-select --install</code></pre><p>完了まで待ち、VS Codeのターミナルを開き直します。Homebrewを導入済みなら、<code>brew install git</code>も選べます。</p><p class="source-link"><a href="https://git-scm.com/install/mac">macOSのGit公式手順 ↗</a></p></section></div>
+<p class="checkpoint"><strong>ここまでの確認：</strong><code>git --version</code>で<code>git version …</code>と表示されればOKです。</p>
+</div></details>
+
+<details class="guide-step" id="quarto"><summary><span class="step-no">03</span><span class="step-title">Quarto本体と拡張機能を入れる<small>QMDの文章をHTMLへ変換できるようにします。</small></span><span class="step-tag">共通</span></summary><div class="step-body">
+<p><strong>Quarto CLIは変換する本体、VS Code拡張は編集の補助</strong>です。まず本体をインストールします。</p><a class="download-link" href="https://quarto.org/docs/get-started/">Quartoの公式ダウンロードページ ↗</a>
+<div class="os-grid"><section><h3>Windows</h3><ol><li>公式ページでWindows用のインストーラー（<code>.msi</code>）を選びます。</li><li>ダウンロードしたファイルを開き、案内に沿ってインストールします。</li><li>VS Codeを再起動し、新しいターミナルを開きます。</li></ol></section><section><h3>macOS</h3><ol><li>公式ページでmacOS用のインストーラー（<code>.pkg</code>）を選びます。</li><li>ファイルを開き、案内に沿ってインストールします。</li><li>VS Codeを再起動し、新しいターミナルを開きます。</li></ol></section></div>
+<h3>Quarto拡張も追加する</h3><ol><li>VS Codeの「拡張機能」を開き、「Quarto」を検索します。</li><li><a href="https://marketplace.visualstudio.com/items?itemName=quarto.quarto">Quarto拡張</a>をインストールします。</li><li>後で<code>.qmd</code>を開くと、文章や設定の編集を補助してくれます。</li></ol>
+<p>このリポジトリの配布用HTML/PDFは、後の手順にある<code>scripts/slides.py build</code>で生成します。</p><pre><code>quarto --version</code></pre><p class="checkpoint"><strong>ここまでの確認：</strong>ターミナルにQuartoのバージョン番号が出れば、本体を使用できます。</p><p class="source-link"><a href="https://quarto.org/docs/get-started/hello/vscode.html">Quarto公式：VS Codeでの利用 ↗</a></p>
+</div></details>
+
+<details class="guide-step" id="ai"><summary><span class="step-no">04</span><span class="step-title">Codex または Claude Codeを入れる<small>どちらか1つの拡張を選び、サインインします。</small></span><span class="step-tag choice-tag">選択</span></summary><div class="step-body">
+<p>どちらも、VS Codeで開いたプロジェクトのファイルを読み、文章やHTML図の作成を手伝います。自分が利用できるサービスを1つ選んでください。</p>
+<details class="sub-detail" id="codex"><summary><span><strong>Codexを使う</strong><small>OpenAIのVS Code拡張</small></span></summary><div><ol><li>VS Codeの「拡張機能」を開き、<code>Codex</code>を検索します。</li><li>発行元が<strong>OpenAI</strong>の拡張を選び、インストールします。<a href="https://marketplace.visualstudio.com/items?itemName=openai.chatgpt">拡張のページ ↗</a></li><li>Codexのアイコンをクリックしてパネルを開きます。見つからない場合は、コマンドパレットで<code>Codex: Open Codex Sidebar</code>を実行します。</li><li><strong>Sign in with ChatGPT</strong>を選び、ブラウザでサインインしてVS Codeに戻ります。</li><li>後の手順で<code>quarto-html</code>フォルダを開いたら、Codexのチャットから依頼します。</li></ol><p>コマンドパレットはWindowsで<kbd>Ctrl</kbd>＋<kbd>Shift</kbd>＋<kbd>P</kbd>、macOSで<kbd>⌘</kbd>＋<kbd>Shift</kbd>＋<kbd>P</kbd>です。</p><p>利用可否・上限はアカウントや組織の設定によります。APIキーで利用する場合はAPI利用分が別途課金されるため、まず利用可能なChatGPTアカウントでのサインインを確認してください。</p><p class="source-link">公式：<a href="https://learn.chatgpt.com/docs/codex/ide">Codex IDE拡張</a> · <a href="https://learn.chatgpt.com/docs/auth">サインイン方法</a></p></div></details>
+<details class="sub-detail" id="claude"><summary><span><strong>Claude Codeを使う</strong><small>AnthropicのVS Code拡張</small></span></summary><div><ol><li>VS Codeの「拡張機能」を開き、<code>Claude Code</code>を検索します。</li><li>発行元が<strong>Anthropic</strong>の拡張をインストールします。<a href="https://marketplace.visualstudio.com/items?itemName=anthropic.claude-code">拡張のページ ↗</a></li><li>Claude Codeのアイコンをクリックします。見つからない場合はコマンドパレットで<code>Claude Code</code>を検索し、<strong>Open in New Tab</strong>などを選びます。</li><li><strong>Sign in</strong>を選び、ブラウザで認証してVS Codeへ戻ります。</li><li>利用できるClaudeの有料プラン、またはClaude Consoleのアカウントでサインインします。拡張のチャットにはCLIが同梱されるため、ターミナル用CLIを別に入れる必要はありません。</li></ol><p>ターミナルで<code>claude</code>コマンドも使いたい場合は、別途CLIを導入します。このガイドでは拡張のチャットを使います。</p><p class="source-link">公式：<a href="https://code.claude.com/docs/en/vs-code">VS Code拡張</a> · <a href="https://code.claude.com/docs/en/setup">Windowsなどの環境設定</a></p></div></details>
+<p class="checkpoint"><strong>ここまでの確認：</strong>選んだAI拡張でサインインでき、チャット入力欄が表示されればOKです。</p>
+</div></details>
+
+<details class="guide-step" id="clone"><summary><span class="step-no">05</span><span class="step-title">テンプレートリポジトリをcloneする<small>murata-lab/quarto-htmlを、自分のPCにコピーします。</small></span><span class="step-tag">共通</span></summary><div class="step-body">
+<p>cloneは、GitHub上のリポジトリを履歴ごと手元にコピーする操作です。ローカルで編集しただけでは、研究室のリポジトリは変更されません。</p><p><a href="https://github.com/murata-lab/quarto-html">テンプレート：murata-lab/quarto-html ↗</a></p>
+<h3>方法A：VS Codeの画面からcloneする</h3><ol><li>コマンドパレットを開き、<code>Git: Clone</code>を検索して実行します。</li><li>次のURLを入力してEnterを押します。</li></ol><pre><code>https://github.com/murata-lab/quarto-html.git</code></pre><ol start="3"><li>保存先の親フォルダを選びます。たとえば「ドキュメント」の下の作業用フォルダです。</li><li>cloneが終わったら<strong>Open／開く</strong>を選びます。</li><li>左のファイル一覧で<code>README.md</code>、<code>decks</code>、<code>scripts</code>が見えることを確認します。</li></ol>
+<details class="sub-detail"><summary>方法B：ターミナルでcloneする</summary><div><p>保存先の親フォルダをVS Codeで開いてから、ターミナルで実行します。</p><pre><code>git clone https://github.com/murata-lab/quarto-html.git
+cd quarto-html</code></pre><p>その後「ファイル → フォルダーを開く」で、できた<code>quarto-html</code>を開きます。<code>code</code>コマンドを設定済みなら、<code>code .</code>でも開けます。</p></div></details>
+<h3>フォルダを開き直してから作業する</h3><p>cloneしたフォルダ自体を開くと、AIも制作ルールとスライドの場所を把握しやすくなります。ターミナルは一度閉じて「ターミナル → 新しいターミナル」で開き直してください。</p><pre><code>git branch --show-current</code></pre><p><code>main</code>と表示されることを確認します。公開サイト用の<code>gh-pages</code>へ切り替える必要はありません。</p>
+<p class="checkpoint"><strong>ここまでの確認：</strong>VS Codeで<code>quarto-html</code>を開き、<code>decks/nco-intro/memo.md</code>を表示できればOKです。</p><p class="source-link"><a href="https://code.visualstudio.com/docs/sourcecontrol/repos-remotes">VS Code公式：リポジトリのclone ↗</a></p>
+</div></details>
+
+<details class="guide-step" id="uv"><summary><span class="step-no">06</span><span class="step-title">uvをインストールする<small>Pythonと、ビルドに必要なライブラリを管理します。</small></span><span class="step-tag">共通</span></summary><div class="step-body">
+<p>このテンプレートのコマンドは<code>uv run</code>で実行します。uvが必要なPythonを取得できるため、先にPythonを個別にインストールする必要はありません。</p>
+<div class="os-grid"><section><h3>Windows / PowerShell</h3><p>VS Codeのターミナルで、次を実行します。</p><pre><code>winget install --id=astral-sh.uv -e</code></pre><p><code>winget</code>が使えないときは、<a href="https://docs.astral.sh/uv/getting-started/installation/">uv公式ページ</a>のWindows用インストーラー手順を利用します。</p></section><section><h3>macOS / ターミナル</h3><pre><code>curl -LsSf https://astral.sh/uv/install.sh | sh</code></pre><p>Homebrewを利用している場合は<code>brew install uv</code>でも導入できます。どちらか一方で構いません。</p></section></div>
+<p>インストール後はVS Codeを開き直し、<code>quarto-html</code>フォルダで新しいターミナルを開きます。</p><pre><code>uv --version</code></pre><p class="checkpoint"><strong>ここまでの確認：</strong><code>uv …</code>とバージョン番号が表示されればOKです。</p><p class="source-link">公式：<a href="https://docs.astral.sh/uv/getting-started/installation/">uvのインストール</a> · <a href="https://docs.astral.sh/uv/guides/install-python/">Pythonの自動導入</a></p>
+</div></details>
+
+<details class="guide-step" id="build"><summary><span class="step-no">07</span><span class="step-title">サンプルをビルドして開く<small>環境を準備し、HTMLとPDFを実際に生成します。</small></span><span class="step-tag">確認</span></summary><div class="step-body">
+<p>以降のコマンドはすべて、<code>README.md</code>と<code>pyproject.toml</code>がある<code>quarto-html</code>直下のターミナルで実行します。</p>
+<p>Windowsでは、先に次のトグルを開いてUTF-8を設定してください。</p>
+<details class="sub-detail"><summary>Windows：最初にUTF-8を設定する</summary><div><p>PowerShellで次を実行してから、この項目のコマンドを進めます。日本語を含むファイルをUTF-8で読み書きするための設定です。新しいターミナルを開いたら再度実行します。</p><pre><code>$env:PYTHONUTF8 = "1"</code></pre></div></details>
+<h3>1. Pythonとライブラリをそろえる</h3><pre><code>uv sync</code></pre><p>プロジェクトにはPython 3.13が指定されています。必要なPythonとライブラリが取得され、<code>.venv</code>フォルダが作られます。初回はインターネット接続が必要です。</p>
+<h3>2. PDF生成用のブラウザを入れる</h3><pre><code>uv run playwright install chromium</code></pre><p>Playwright用のChromiumをダウンロードします。普段使うChromeとは別に管理される、PDF出力とブラウザ検査用のブラウザです。</p>
+<h3>3. サンプルを生成する</h3><pre><code>uv run scripts/slides.py build nco-intro</code></pre><p>QMDの変換、HTMLへの図の内包、ブラウザ検査、PDFの出力まで実行します。エラーが出た場合は、このページ下部の「困ったとき」を確認してください。</p>
+<h3>4. 出力したファイルを開く</h3><ul><li><code>output/nco-intro.html</code>：エクスプローラー／Finderからブラウザで開きます。VS Code内で開いてコードが表示された場合も、ファイルの異常ではありません。</li><li><code>output/nco-intro.pdf</code>：PDFビューアーで開きます。図は各ページの最後のstepで固定されます。</li></ul>
+<p>スライドは<kbd>↑</kbd><kbd>↓</kbd>でページ移動、<kbd>←</kbd><kbd>→</kbd>でstep移動。<kbd>O</kbd>または<kbd>Esc</kbd>で一覧を開けます。</p>
+<p class="checkpoint"><strong>ここまでの確認：</strong>コマンドが正常終了し、HTMLの矢印操作とPDFの表示を確認できれば、制作環境の準備は完了です。</p>
+</div></details>
+
+<details class="guide-step" id="first-slide"><summary><span class="step-no">08</span><span class="step-title">自分のスライドを作り始める<small>メモを書いて、AIに最初の依頼をします。</small></span><span class="step-tag">制作</span></summary><div class="step-body">
+<h3>1. 新しい発表のフォルダを作る</h3><pre><code>uv run scripts/slides.py new my-talk</code></pre><p><code>my-talk</code>は発表を区別する名前です。既存のサンプルをもとにしたい場合は、上のコマンドの代わりに次を実行します。</p><pre><code>uv run scripts/slides.py new my-talk --from nco-intro</code></pre>
+<h3>2. メモを埋める</h3><p><code>decks/my-talk/memo.md</code>を開き、次の内容を書きます。図のプロンプト例は<a href="./#example">紹介ページの制作例</a>も参考にしてください。</p><ul><li>対象読者と、一番伝えたいこと</li><li>スライドの説明順と、載せるデータ・文献</li><li>図の配置、最初の状態、stepごとの変化、最後の状態</li></ul>
+<h3>3. AIのチャットに依頼する</h3><p>CodexでもClaude Codeでも、制作ルールと対象ファイルを指定して依頼します。Claude Codeにも同じルールを読ませるため、最初の依頼に明記しています。</p>
+<pre class="prompt-example"><code>まず AGENTS.md と .agents/skills/quarto-slides/SKILL.md を読んでください。
+decks/my-talk/memo.md の案に沿って、スライドを作ってください。
+対象読者と結論、図のstepを確認し、不足があれば質問してください。
+編集後は uv run scripts/slides.py build my-talk を実行して、
+HTMLとPDFを確認してください。</code></pre>
+<h3>4. 生成物を見て修正する</h3><p><code>output/my-talk.html</code>と<code>output/my-talk.pdf</code>を開きます。「研究背景の図を大きく」「配送経路の最後に倉庫へ戻して」など、ページと変えたいことを指定して追加で依頼します。</p>
+<p class="checkpoint"><strong>次に進む：</strong>メモ → AIに依頼 → HTML/PDFを確認 → 修正、を繰り返します。</p>
+</div></details>
+
+<section class="trouble-section" id="trouble"><div class="eyebrow">TROUBLESHOOTING</div><h2>困ったときは、ここから。</h2>
+<details class="sub-detail"><summary>「git / quarto / uvが見つからない」と表示される</summary><div><p>インストール直後は、開いていたターミナルに設定が反映されないことがあります。VS Codeを完全に終了し、起動し直して新しいターミナルで確認します。</p><pre><code>git --version
+quarto --version
+uv --version</code></pre><p>1つだけ失敗する場合は、その道具の導入手順へ戻ります。Quarto拡張だけを入れても<code>quarto</code>コマンドは追加されません。本体のインストールも確認してください。</p></div></details>
+<details class="sub-detail"><summary>AI拡張が見つからない・サインインできない</summary><div><p>VS Codeの拡張機能一覧で、発行元がOpenAI／Anthropicになっているか確認します。インストール済みなら、コマンドパレットの<code>Developer: Reload Window</code>で再読み込みします。</p><p>認証はブラウザで完了してからVS Codeに戻ります。利用できるプランや組織の設定はサービスごとに異なるため、<a href="#ai">AI拡張の項目</a>にある公式手順でアカウントの条件を確認してください。</p></div></details>
+<details class="sub-detail"><summary>clone先が既にある・どのフォルダを開くか分からない</summary><div><p><code>destination path … already exists</code>と出たら、同じ場所に<code>quarto-html</code>が存在します。すでにclone済みなら、そのフォルダを「ファイル → フォルダーを開く」で開いてください。</p><p>ファイル一覧の直下に<code>README.md</code>、<code>pyproject.toml</code>、<code>decks</code>、<code>scripts</code>があれば正しい場所です。</p></div></details>
+<details class="sub-detail"><summary>「pyproject.tomlがない」「scripts/slides.pyがない」と出る</summary><div><p>ターミナルの作業場所が異なります。VS Codeでcloneした<code>quarto-html</code>自体を開き直し、新しいターミナルを作ります。親フォルダから作業している場合は<code>cd quarto-html</code>で移動してください。</p></div></details>
+<details class="sub-detail"><summary>「Executable doesn't exist」など、ブラウザがないと言われる</summary><div><p>PDF生成に必要なChromiumを取得します。ブラウザ更新後などにも再取得が必要になる場合があります。</p><pre><code>uv run playwright install chromium</code></pre><p>成功したらビルドをもう一度実行します。</p></div></details>
+<details class="sub-detail"><summary>Windowsで「UnicodeDecodeError」や文字コードのエラーが出る</summary><div><p>PowerShellでUTF-8を設定し、同じターミナルでビルドを再実行します。</p><pre><code>$env:PYTHONUTF8 = "1"
+uv run scripts/slides.py build nco-intro</code></pre></div></details>
+<details class="sub-detail"><summary>HTMLを開くとコードが表示される</summary><div><p>VS CodeやGitHubのファイル画面はHTMLをソースとして表示します。生成したファイルをエクスプローラー／Finderで探し、右クリックの「プログラムから開く／このアプリケーションで開く」からブラウザを選んでください。</p><p>公開済みサンプルは<a href="nco-intro.html">こちらのスライドリンク</a>からそのまま閲覧できます。</p></div></details>
+<details class="sub-detail"><summary>ビルドが図の重なり・はみ出し検査で失敗する</summary><div><p>エラーを含むターミナル出力をAIに渡し、「どのページのどのstepか確認して修正して」と依頼します。検査画像は<code>.build/&lt;発表名&gt;/</code>に保存されます。本文を短くする、ページを分ける、図の配置を調整するなどして再ビルドします。</p></div></details>
+<details class="sub-detail"><summary>自分のGitHubに保存したい。研究室のリポジトリは変わる？</summary><div><p>clone後の編集は手元に保存されます。研究室のリポジトリへpushしない限り、公開元には反映されません。</p><p>自分のGitHubで管理する場合は<a href="https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template">Use this template</a>が表示される場合はテンプレートから作成、または<a href="https://docs.github.com/en/get-started/quickstart/fork-a-repo">Fork</a>で自分のリポジトリを作り、そのURLをcloneしてください。研究室版をclone済みなら、接続先を確認してから自分のリポジトリに変更します。</p></div></details>
+</section>
+<div class="guide-finish"><div><div class="eyebrow">READY TO CREATE</div><h2>あとは、見せたい変化を。</h2><p>完成例を眺めながら、自分のテーマのメモを書いてみてください。</p></div><a class="primary" href="./#example">アニメーションとプロンプト例を見る ↗</a></div>
+</div></div>
+</main><footer><span>Quarto HTML slides / Murata Lab</span><a href="https://github.com/murata-lab/quarto-html">ソースと使い方 ↗</a></footer>
+</body></html>
