@@ -4,13 +4,35 @@ QuartoのQMDから、アニメーションを内包する**単一HTML**と、各
 
 ## まず見る
 
-[▶ スライドを開く（HTMLプレビュー）](https://htmlpreview.github.io/?https://github.com/edoaki/quarto-html/blob/main/output/nco-intro.html) · [PDFを見る](output/nco-intro.pdf)
+[▶ スライドを開く](https://murata-lab.github.io/quarto-html/nco-intro.html) · [PDFを見る](https://murata-lab.github.io/quarto-html/nco-intro.pdf) · [アニメーションとプロンプト例](https://murata-lab.github.io/quarto-html/)
 
-HTMLプレビューは外部サービスのHTMLPreviewで、GitHubの `main` ブランチにあるスライドをブラウザ表示します。矢印キーやタップで操作できます。
+GitHub Pagesでスライドをブラウザ表示します。矢印キーやタップで操作できます。紹介ページでは、実際のスライドから切り出した「研究背景」のアニメーションと、制作に使うプロンプト例を並べています。
 
 オフラインで見る場合は、[HTMLファイル](output/nco-intro.html)を開き、右上の「Download raw file」から保存してブラウザで開いてください。スマホもHTMLをブラウザで開きます（ファイル管理アプリ内の簡易プレビューはJavaScriptが動かない場合があります）。
 
 制作元：[QMD](decks/nco-intro/slides.qmd) · [スライド案](decks/nco-intro/memo.md)
+
+## 公開サイトと制作環境
+
+制作環境は `main`、公開サイトは独立した `gh-pages` ブランチに分けています。通常の `git clone https://github.com/murata-lab/quarto-html.git` では `main` が開き、サイト用のファイルは作業フォルダに現れません。
+
+GitHub PagesはHTML・CSS・JavaScriptを配信するため、アニメーション、操作できる図、スライド閲覧、PDF配布に使えます。Pythonなどのサーバー処理は実行できません。
+
+公開サイトは `main` のpushだけでは更新されません。HTML/PDFをビルドしてコミットした後、公開用ブランチを別フォルダに開いて更新します。
+
+```sh
+# 初回のみ（以後はこの作業フォルダを再利用）
+git fetch origin gh-pages
+git worktree add .build/pages gh-pages
+
+# サイトに最新のスライドを反映
+uv run python .build/pages/build.py "$PWD"
+git -C .build/pages add .
+git -C .build/pages commit -m "Update published slides"
+git -C .build/pages push origin gh-pages
+```
+
+`build.py` は `output/nco-intro.html` から研究背景の1枚を抽出し、公開用HTML/PDFをコピーします。ループ再生は公開用のページだけに追加します。サイトの文章やプロンプトは `gh-pages` 側の `index.html`、見た目は `site.css` で編集します。
 
 ## 準備
 
