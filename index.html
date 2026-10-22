@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="QuartoとHTMLでつくる、動く研究発表スライド。実際のアニメーションとプロンプトを並べて紹介します。">
+<title>動く図で、研究を伝える。 | Quarto HTML slides</title>
+<link rel="stylesheet" href="site.css">
+<script src="site.js" defer></script>
+</head>
+<body>
+<header><a class="brand" href="./">Quarto HTML slides<span>MURATA LAB</span></a><nav aria-label="メイン"><a href="#example">制作例</a><a href="#how">つくり方</a><a href="https://github.com/murata-lab/quarto-html">GitHub ↗</a></nav></header>
+<main>
+<section class="hero">
+<div class="eyebrow">QUARTO × HTML ANIMATION</div>
+<h1>動く図で、<br>研究を伝える。</h1>
+<p class="lead">経路が伸びる。作業が並ぶ。モデルが学ぶ。<br>伝えたい変化を、ひとつずつ見せるスライド。</p>
+<div class="links"><a class="primary" href="nco-intro.html">サンプルスライドを開く <span>↗</span></a><a class="secondary" href="nco-intro.pdf">PDFを見る ↗</a></div>
+<p class="caption">HTMLは矢印キー・タップで操作できます。ダウンロードすればオフラインでも閲覧できます。</p>
+</section>
+<section id="example" class="example section">
+<div class="section-heading"><div><div class="eyebrow">01 / EXAMPLE</div><h2>ことばから、動く図へ。</h2></div><p>研究背景を説明する、実際のスライドとプロンプト例。<br>図の配置と変化を、文章で指定します。</p></div>
+<div class="showcase">
+<div class="preview-panel"><div class="panel-label"><span>OUTPUT / 研究背景</span><button id="pause" type="button" aria-pressed="false">一時停止</button></div><div class="preview"><iframe id="demo" src="background.html" title="研究背景：配送経路と加工順のアニメーション" loading="lazy"></iframe></div><div class="preview-caption"><span class="dot"></span><span>最初の状態から最後まで、繰り返し再生</span><a href="nco-intro.html#3/0">スライドで見る ↗</a></div></div>
+<div class="prompt-panel"><div class="panel-label"><span>INPUT / プロンプト例</span><button id="copy" type="button">コピー</button></div><pre id="prompt">1. 研究背景
+   社会にある実問題から　組合せ最適化の概念を導入。
+
+html --
+左右で2つの問題例をだす。それぞれのアニメーションの下に
+決めるもの、制約、目的　を書く。
+左側　配送経路
+四角の中に倉庫一つと家みたいなのを複数個用意、
+倉庫から線が伸びて経路が作られるのを模擬。
+右側　何か物の加工順
+JSPかFSSPみたいな問題を例示。
+作るもの3つで、作業機械3つ　A,B,Cで
+作るものはそれぞれ　作業をもち、色でわかる感じ。
+横軸時間、縦軸機械
+いい感じに順番に詰め込まれていく。
+待ち時間的なことをやったりして単調にならないように。
+--</pre><span id="copy-status" role="status"></span></div>
+</div>
+<p class="note">左は <code>output/nco-intro.html</code> の「研究背景」1枚を抽出したHTMLです。元の図と遷移を使い、この展示では自動でループ再生します。プロンプトは制作指示の例で、完成版には引用と説明文も加えています。</p>
+</section>
+<section id="how" class="section how"><div class="eyebrow">02 / WORKFLOW</div><h2>見せたい変化を、順番に書く。</h2><div class="steps"><article><span>01</span><h3>何を伝えるか決める</h3><p>対象読者と結論、説明の順番をメモにします。「配送と加工順から、組合せ最適化を導入する」のように目的を具体的に。</p></article><article><span>02</span><h3>配置と動きを指定する</h3><p>左右の役割、図に置くもの、最初の状態、次に変わるもの、最後の状態を書きます。数・色・軸・制約も指定すると伝わります。</p></article><article><span>03</span><h3>生成して、確かめる</h3><p>AIにメモと制作ルールを渡し、QMDとHTML図を作成。ビルド後に動きと文字の重なり、PDFの最終状態を確認します。</p></article></div><div class="code-row"><pre><code>git clone https://github.com/murata-lab/quarto-html.git
+cd quarto-html
+uv sync
+uv run playwright install chromium
+uv run scripts/slides.py build nco-intro</code></pre><div><h3>手元で試す</h3><p>Quarto CLIとuvを用意して実行します。出力はアニメーションを内包した単一HTMLと、各ページの最終状態を収めたPDFです。</p><a href="https://github.com/murata-lab/quarto-html#準備">セットアップと制作ルール ↗</a></div></div></section>
+<section class="section hosting"><div class="eyebrow">03 / GITHUB PAGES</div><h2>リンクひとつで、見せられる。</h2><div class="hosting-grid"><article><h3>動くデモを公開</h3><p>HTML・CSS・JavaScriptを配信できるので、スライド、ループするアニメーション、操作できる図をそのまま公開できます。</p></article><article><h3>プロンプトと並べる</h3><p>完成した図の隣に制作指示を置けば、見た人が自分の発表に応用できます。HTMLやPDFへのリンクも置けます。</p></article><article><h3>制作環境と分ける</h3><p>このサイトは専用の <code>gh-pages</code> ブランチに置いています。通常のcloneで開く <code>main</code> には、サイトのファイルが混ざりません。</p></article></div><p class="note">GitHub Pagesは静的サイトのホスティングです。Pythonの実行やデータベースへの保存など、サーバー側の処理には別のサービスが必要です。<a href="https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages">GitHub Pagesについて ↗</a></p></section>
+</main>
+<footer><span>Quarto HTML slides / Murata Lab</span><a href="https://github.com/murata-lab/quarto-html">ソースと使い方 ↗</a></footer>
+</body></html>
